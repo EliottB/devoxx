@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Informations from './informations';
-import StepTeams from './teams';
+
 import { Infos, Teams } from '../../model/experience';
 
 interface Props {}
@@ -31,18 +31,6 @@ class CreateWizard extends React.Component<Props, State> {
             <Informations
               onChange={(informations: Infos) => {
                 this.setState({ informations });
-              }}
-            />
-          )}
-        />
-        <Route
-          exact
-          key="enterprises-create-teams"
-          path="/experience/create/teams"
-          component={() => (
-            <StepTeams
-              onChange={(teams: Teams) => {
-                this.setState({ teams });
               }}
             />
           )}

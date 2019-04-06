@@ -61,40 +61,6 @@ class Informations extends React.Component<Props, State> {
             }}
           />
         </label>
-        <div>
-          <label>
-            Practices :
-            <select
-              onChange={({ target: { value } }) => {
-                this.setState({ practices: [...this.state.practices, value] });
-              }}
-            >
-              <option value="react">react</option>
-              <option value="node">node</option>
-              <option value="go">go</option>
-              <option value="angular">angular</option>
-              <option value="mob progamming">mob progamming</option>
-            </select>
-          </label>
-          {this.state.practices.map((practice, indexToFound) => (
-            <div data-testid="practices" key={`${practice}-${indexToFound}`}>
-              <span>{practice}</span>
-              <span
-                onClick={() => {
-                  const practices = this.state.practices.reduce(
-                    (acc: string[], practice, index) => {
-                      return indexToFound !== index ? [...acc, practice] : acc;
-                    },
-                    [],
-                  );
-                  this.setState({ practices });
-                }}
-              >
-                delete
-              </span>
-            </div>
-          ))}
-        </div>
         <Link to="/experience/create/teams">
           <button
             onClick={() => {
