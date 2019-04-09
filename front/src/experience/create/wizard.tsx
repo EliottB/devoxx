@@ -1,26 +1,26 @@
 import React from 'react';
 import { Route } from 'react-router';
-import Informations from './Informations';
+import Informations from './informations';
+import { Infos } from '../../model/experience';
+import { FullSizeContainer, TitleWizard } from '../../globalStyle';
 
-import { Infos, Teams } from '../../model/experience';
+interface Props {}
 
 interface State {
   informations: Infos;
-  teams: Teams;
 }
 
-class CreateWizard extends React.Component<{}, State> {
-  constructor(props: {}) {
+class CreateWizard extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       informations: { practices: [] },
-      teams: { generalTeam: [], involvedTeam: [] },
     };
   }
   render() {
     return (
-      <div>
-        <h4>Register : </h4>
+      <FullSizeContainer>
+        <TitleWizard>Create your experience </TitleWizard>
         <Route
           exact
           key="enterprises-create-informations"
@@ -33,7 +33,7 @@ class CreateWizard extends React.Component<{}, State> {
             />
           )}
         />
-      </div>
+      </FullSizeContainer>
     );
   }
 }
