@@ -1,7 +1,7 @@
 import React from 'react';
 import { Experience } from '../model/experience';
 import styled from 'styled-components';
-import { backendPath } from './../config';
+import { backendPath } from '../config';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -12,7 +12,7 @@ interface State {
   experience?: Experience;
 }
 
-class Details extends React.Component<Props, State> {
+class ExperienceDetails extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {};
@@ -112,4 +112,4 @@ const PracticesContainer = styled.div`
   }
 `;
 
-export default Details;
+export default ExperienceDetails;

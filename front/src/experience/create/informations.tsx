@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../../design-system/Input';
 import { Infos } from '../../model/experience';
 import styled from 'styled-components';
 
@@ -23,40 +22,40 @@ class Informations extends React.Component<Props, State> {
         Informations
         <label>
           Name :
-          <Input
+          <input
             value={this.state.name}
             placeholder="Name"
-            onChange={name => {
+            onChange={({target: {value: name}}) => {
               this.setState({ name });
             }}
           />
         </label>
         <label>
           Description :
-          <Input
+          <input
             value={this.state.description}
             placeholder="Description"
-            onChange={description => {
+            onChange={({target: {value: description}}) => {
               this.setState({ description });
             }}
           />
         </label>
         <label>
           Organisation :
-          <Input
+          <input
             value={this.state.organisation}
             placeholder="Organisation"
-            onChange={organisation => {
+            onChange={({target: {value: organisation}}) => {
               this.setState({ organisation });
             }}
           />
         </label>
         <label>
           Localisation :
-          <Input
+          <input
             value={this.state.localisation}
             placeholder="Localisation"
-            onChange={localisation => {
+            onChange={({target: {value: localisation}}) => {
               this.setState({ localisation });
             }}
           />

@@ -1,18 +1,16 @@
 import React from 'react';
 import { Route } from 'react-router';
-import Informations from './informations';
+import Informations from './Informations';
 
 import { Infos, Teams } from '../../model/experience';
-
-interface Props {}
 
 interface State {
   informations: Infos;
   teams: Teams;
 }
 
-class CreateWizard extends React.Component<Props, State> {
-  constructor(props: Props) {
+class CreateWizard extends React.Component<{}, State> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       informations: { practices: [] },
