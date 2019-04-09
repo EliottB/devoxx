@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import Informations from './informations';
+import Informations from './Informations';
 import { Infos } from '../../model/experience';
 import { FullSizeContainer, TitleWizard } from '../../globalStyle';
 
