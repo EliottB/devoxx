@@ -97,7 +97,7 @@ class Informations extends React.Component<Props, State> {
         </div>
 
         <label className={styles['label']} />
-        <Link to='/experience/create/StepTeams'>
+        <Link to='/experience/create/team'>
           <button
             className={styles['button']}
             onClick={() => {

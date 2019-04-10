@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Informations from './Informations';
+import Team from './Team';
 import { Infos } from '../../model/experience';
 import { FullSizeContainer, TitleWizard } from '../../styles';
 
@@ -32,6 +33,12 @@ class CreateWizard extends React.Component<Props, State> {
               }}
             />
           )}
+        />
+        <Route
+          exact
+          key='enterprises-create-team'
+          path='/experience/create/team'
+          component={Team}
         />
       </FullSizeContainer>
     );
