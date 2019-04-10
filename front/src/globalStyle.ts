@@ -22,7 +22,7 @@ export const ListContainer = styled.div`
   }
 `;
 
-export const EnterpriseCard = styled.div`
+export const ExperienceCard = styled.div`
   padding: 20px;
   border: 2px solid #e39774;
   border-radius: 4px;

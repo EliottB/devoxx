@@ -1,4 +1,4 @@
-## Step 1 : Display the list of experiences (StateLessComponent & Props & ListOnKeys)
+## Step 1 : Display the list of experiences (FunctionComponent & Props & ListOnKeys)
 
 - You have to create a `Component` that takes a list of experiences : `Experience[]` as properties and display it.
 
@@ -22,7 +22,7 @@
 * Styles tips :
   ```html
   <ListMainContainer>
-    <ListContainer>[LIST HERE]</ListContainer>
+    <ListContainer> [LIST HERE] -- <ExperienceCard /> </ListContainer>
   </ListMainContainer>
   <!-- -->
   <Name>Crème de la crème</Name>
