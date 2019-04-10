@@ -62,9 +62,9 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
   - Conditional Rendering
   - Lifting State Up
 
-- Lors d'un clique sur une `ExperienceCard` vous devez :
+- Lors d'un clic sur une `ExperienceCard` vous devez :
   - remplacer la `name`, `description`, `organisation`, `location` par le détail de l'expérience
-  - Un second clique sur les détails fait retrouver son état d'origine à `ExperienceCard`
+  - Un second clic sur les détails fait retrouver son état d'origine à `ExperienceCard`
   - Une seule `ExperienceCard` à la fois affiche le détail d'une expérience
   - Pour afficher les détails vous devez vous servir du component `Details` se trouvant dans [./front/src/experience/ExperienceDetails.tsx](./front/src/experience/ExperienceDetails.tsx)
 
@@ -95,7 +95,7 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
   - Sous le `<select>` remplacez les commentaires par une liste de `Practices`
 
     - cette liste est alimenté à chaque changement de valeurs du `<select>`
-    - chaque éléments doivent pouvoir êtres retirer de la liste en un clique
+    - chaque éléments doivent pouvoir êtres retirer de la liste en un clic
 
   - Veillez à nettoyer la valeur du `<select>` apres chaque changement
 
@@ -106,37 +106,20 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
   - Hook
   - Form validation
 
-- In `<List>` when the name is clicked hide the entire list and display the details usin `<Details>` from _`src/experience/details/tsx`_
+- Depuis [la page Informations](http://localhost:3001/experience/create/informations) lorsque vous cliquez sur `Suivant` vous êtes redirigé sur la route [http://localhost:3000/experience/create/team](http://localhost:3001/experience/create/team) qui affiche le component `Team` de [./front/src/experience/create/Informations.tsx](./front/src/experience/create/Informations.tsx)
 
-## Step 6 : Select & Router & Controlled Inuput
+- Vous allez devoir créer un formulaire pour renseigner le nom et le role d'un membre et en suite afficher la liste des membres : [HTML final](./front/html-css-integration/Team.html)
 
-- Use `<Link>` to navigate to _`src/experience/create/wizard.tsx`_
+- Le formulaire :
 
-* `<CreateWizard>` is diplayed on _`/experience/create`_ route
-* `<Informations>` is diplayed on _`/experience/create/informations`_ route
-* In `<Informations>` , at the end of the form `add` a <select>
+  - Créer un (StateLess)component respectant ces critères :
+    - Un champ text pour le `name`
+    - Un champ text pour le `role`
+    - Un bouton `add`
+    - prends en property une fonction `onChange` qui retourne un [People](./front/src/model/experience.ts)
+    - Au clic sur le bouton le component retourne un `People` si le `name` et le `role` sont renseignés, sinon ne retourne rien
+    - Une fois un `People` retourné vider les champs text
 
-- on each `Onchange` of the select add the value to `this.state.pratices`
-- Under the select display `this.state.pratices`
-- On each pratices displayed add a delete button that removes the practice of the list
-
-## Step 7 : Typescript & form Component
-
-- First create a file `teams.tsx` in _`src/experience/create/`_ and export default `StepTeams`
-- In `<Wizard>` make `<StepTeams>`display on route _`experience/create/teams`_
-- In `teams.tsx` create also a component names `PeopleInput`
-  - It provide two text inputs : `Name` and `Role`, and an add button
-    - For tests use `Name` and `Role` as `placeholder`
-  - It takes as parameter an `onChange` methode that return a `People` object
-  ```ts
-  interface People {
-    name: string;
-    role: string;
-  }
-  ```
-- When add is clicked checked if the fields are filled
-
-  - if it is return the `People` and empty the fields
-  - if not do nothing
-
-- In `<StepTeam>` store the `People` returned in a list and display it
+- La liste :
+  - Afficher la liste des membres ajouté à l'équipe
+  - Un membre doit pouvoir être supprimé en un clic
