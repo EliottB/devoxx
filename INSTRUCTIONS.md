@@ -13,7 +13,7 @@ Cette étape consiste à afficher la liste des expériences depuis un fichier JS
 - Implémenter le composant `ExperienceList` dans [./front/src/experience/ExperienceList.tsx](./front/src/experience/ExperienceList.tsx). Appuyez vous sur le fichier HTML [./front/html-css-integration/ExperienceList.html](./front/html-css-integration/ExperienceList.html) et sur le fichier CSS [./front/src/experience/ExperienceList.module.css](./front/src/experience/ExperienceList.module.css). La liste des expériences venant du fichier [./front/src/data/experiences.json](./front/src/data/experiences.json) peut être chargée avec le code suivant :
 
   ```typescript
-  const experiences: Experience[] = require("../data/experiences.json");
+  const experiences: Experience[] = require('../data/experiences.json');
   ```
 
 - Refactorer le code en extrayant le code lié à une expérience dans un composant ExperienceCard. A titre d'exercice, utilisez une arrow function plutôt que le mot clé `function`. Faites l'exerice également d'utiliser la `nested destructuration`(cf slide #??) sur le paramètre du composant afin de pouvoir utiliser directement les noms des propriétés de l'objet Experience.
@@ -37,7 +37,7 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
   ```typescript
   async function fetchExperiences(filter?: string): Promise<Experience[]> {
     const result = await fetch(
-      `http://localhost:3001/list/experience/${filter || ""}`
+      `http://localhost:3001/list/experience/${filter || ''}`,
     );
     const { response } = await result.json();
     return response;
@@ -61,6 +61,12 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
   - Handling Events (div.onClick)
   - Conditional Rendering
   - Lifting State Up
+
+- Lors d'un clique sur une `ExperienceCard` vous devez :
+  - remplacer la `name`, `description`, `organisation`, `location` par le détail de l'expérience
+  - Un second clique sur les détails fait retrouver son état d'origine à `ExperienceCard`
+  - Une seule `ExperienceCard` à la fois affiche le détail d'une expérience
+  - Pour afficher les détails vous devez vous servir du component `Details` se trouvant dans [./front/src/experience/ExperienceDetails.tsx](./front/src/experience/ExperienceDetails.tsx)
 
 ## Etape 5 : Permettre l'ajout et la suppression de `practices` dans le formulaire de création d'expérience
 
