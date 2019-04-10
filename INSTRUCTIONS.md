@@ -71,7 +71,33 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
 ## Etape 5 : Permettre l'ajout et la suppression de `practices` dans le formulaire de création d'expérience
 
 - React concepts utiles:
+
   - Controlled Component
+
+- Lorsque vous cliquez sur `Créer une experience` vous êtes redirigé sur la route [http://localhost:3000/experience/create/informations](http://localhost:3001/experience/create/informations) qui affiche le component `Informations` de [./front/src/experience/create/Informations.tsx](./front/src/experience/create/Informations.tsx)
+- Vous trouverez un exemple html ici :[./front/html-css-integration/Informations.tsx](./front/html-css-integration/Informations.tsx)
+
+- Dans [Informations.tsx](./front/src/experience/create/Informations.tsx) :
+
+  - Vous devrez ajouter un `<select>` après le label `Practices` (remplacez les commentaires)
+
+    - Options du select :
+
+    ```html
+    <option value=""></option>
+    <option value="react">react</option>
+    <option value="node">node</option>
+    <option value="go">go</option>
+    <option value="angular">angular</option>
+    <option value="mob progamming">mob progamming</option>
+    ```
+
+  - Sous le `<select>` remplacez les commentaires par une liste de `Practices`
+
+    - cette liste est alimenté à chaque changement de valeurs du `<select>`
+    - chaque éléments doivent pouvoir êtres retirer de la liste en un clique
+
+  - Veillez à nettoyer la valeur du `<select>` apres chaque changement
 
 ## Etape 6 : Permettre l'ajout de personnes dans le formulaire de création d'experience
 
@@ -86,23 +112,9 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
 
 - Use `<Link>` to navigate to _`src/experience/create/wizard.tsx`_
 
-```tsx
-<Link to="/experience/create/informations">
-  <button>Add an experience</button>
-</Link>
-```
-
-- `<CreateWizard>` is diplayed on _`/experience/create`_ route
-- `<Informations>` is diplayed on _`/experience/create/informations`_ route
-- In `<Informations>` , at the end of the form `add` a <select>
-
-```html
-<option value="react">react</option>
-<option value="node">node</option>
-<option value="go">go</option>
-<option value="angular">angular</option>
-<option value="mob progamming">mob progamming</option>
-```
+* `<CreateWizard>` is diplayed on _`/experience/create`_ route
+* `<Informations>` is diplayed on _`/experience/create/informations`_ route
+* In `<Informations>` , at the end of the form `add` a <select>
 
 - on each `Onchange` of the select add the value to `this.state.pratices`
 - Under the select display `this.state.pratices`

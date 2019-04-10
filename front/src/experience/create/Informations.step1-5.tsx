@@ -60,41 +60,18 @@ class Informations extends React.Component<Props, State> {
         />
 
         <label className={styles['label']}>Practices :</label>
-        <select
-          value=''
-          className={styles['select']}
-          onChange={({ target: { value } }) => {
-            this.setState({ practices: [...this.state.practices, value] });
-          }}
-        >
-          <option value='' />
-          <option value='react'>react</option>
-          <option value='node'>node</option>
-          <option value='go'>go</option>
-          <option value='angular'>angular</option>
-          <option value='mob progamming'>mob progamming</option>
-        </select>
 
-        <div className={styles['practices-container']}>
-          {this.state.practices.map((practice, indexToFound) => (
-            <div data-testid='practices' key={`${practice}-${indexToFound}`}>
-              <span>{practice}</span>
-              <span
-                onClick={() => {
-                  const practices = this.state.practices.reduce(
-                    (acc: string[], practice, index) => {
-                      return indexToFound !== index ? [...acc, practice] : acc;
-                    },
-                    [],
-                  );
-                  this.setState({ practices });
-                }}
-              >
-                x
-              </span>
-            </div>
-          ))}
-        </div>
+        {/***
+
+          STEP 5 : REPLACE THIS COMMENT BY THE SELECT 
+
+        ***/}
+
+        {/***
+
+          STEP 5 : REPLACE THIS COMMENT BY THE PRACTICES LIST 
+          
+        ***/}
 
         <label className={styles['label']} />
         <Link to='/experience/create/StepTeams'>
