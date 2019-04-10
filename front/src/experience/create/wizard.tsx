@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router';
 import Informations from './Informations';
 import { Infos } from '../../model/experience';
-import { FullSizeContainer, TitleWizard } from '../../globalStyle';
+import { FullSizeContainer, TitleWizard } from '../../styles';
 
 interface Props {}
 
@@ -23,8 +23,8 @@ class CreateWizard extends React.Component<Props, State> {
         <TitleWizard>Create your experience </TitleWizard>
         <Route
           exact
-          key="enterprises-create-informations"
-          path="/experience/create/informations"
+          key='enterprises-create-informations'
+          path='/experience/create/informations'
           component={() => (
             <Informations
               onChange={(informations: Infos) => {

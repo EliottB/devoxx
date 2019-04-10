@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange",
+    "git.rebaseWhenSync": true,
+    "files.exclude": {
+      "**/node_modules": true
+    },
+  }

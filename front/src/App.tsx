@@ -1,25 +1,17 @@
+import styles from './App.module.css';
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import CreateWizard from './experience/create/Wizard';
-import { MainContainer, Header } from './globalStyle';
+import ExperienceList from './experience/ExperienceList';
 
 export const App = () => {
   return (
     <BrowserRouter>
-      <MainContainer>
-        <Header>Experiences</Header>
-        <Route
-          path="/"
-          exact
-          component={() => (
-            <div>
-              TODO: STEP 1 - REPLACE THIS ARROW FUNCTION BY THE ExperienceList
-              COMPONENT
-            </div>
-          )}
-        />
-        <Route path="/experience/create" component={CreateWizard} />
-      </MainContainer>
+      <div className={styles['main-container']}>
+        <div className={styles['header']}>Experiences</div>
+        <Route path='/' exact component={ExperienceList} />
+        <Route path='/experience/create' component={CreateWizard} />
+      </div>
     </BrowserRouter>
   );
 };

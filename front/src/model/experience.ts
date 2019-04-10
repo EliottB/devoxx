@@ -1,9 +1,10 @@
 export interface Experience {
+  id: string;
   name: string;
   description: string;
   organisation: string;
   practices: string[];
-  localisation: string;
+  location: string;
   teamGeneral: People[];
   teamInvolved: People[];
 }
@@ -17,7 +18,7 @@ export interface Infos {
   name?: string;
   description?: string;
   organisation?: string;
-  localisation?: string;
+  location?: string;
   practices: string[];
 }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Experience } from '../model/experience';
 import styled from 'styled-components';
-import { backendPath } from './../config';
 import { Link } from 'react-router-dom';
 
 interface Props {
@@ -26,7 +25,7 @@ class Details extends React.Component<Props, State> {
       <DetailsPage>
         <DetailsContainer>
           <BackContainer>
-            <Link to="/">{'< List'}</Link>{' '}
+            <Link to='/'>{'< List'}</Link>{' '}
           </BackContainer>
           {!!this.state.enterprise ? (
             <>
@@ -34,7 +33,7 @@ class Details extends React.Component<Props, State> {
               <Text>{this.state.enterprise.description}</Text>
               <Text>{this.state.enterprise.organisation}</Text>
               <Label>Main team : </Label>
-              <PeopleContaner data-testid="general-team-container">
+              <PeopleContaner data-testid='general-team-container'>
                 {this.state.enterprise.teamGeneral.map((people, index) => (
                   <People key={index}>
                     <PeopleName>{people.name}</PeopleName>
@@ -44,7 +43,7 @@ class Details extends React.Component<Props, State> {
               </PeopleContaner>
 
               <Label>Practices : </Label>
-              <PracticesContainer data-testid="practices-container">
+              <PracticesContainer data-testid='practices-container'>
                 {this.state.enterprise.practices.map((practice, index) => (
                   <div key={index}>{practice}</div>
                 ))}
@@ -65,7 +64,7 @@ class Details extends React.Component<Props, State> {
 }
 
 async function fetchEnterpriseByName(name: string): Promise<Experience> {
-  const result = await fetch(`${backendPath}/enterprise/${name}`);
+  const result = await fetch(`http://localhost:3001/enterprise/${name}`);
   const { response } = await result.json();
 
   return response;

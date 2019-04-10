@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Infos } from '../../model/experience';
 import styled from 'styled-components';
-import { Button, Label, Input, Textarea } from '../../globalStyle';
+import { Label, Input, Textarea } from '../../styles';
 
 interface Props {
   onChange: (infos: State) => void;
@@ -24,7 +23,7 @@ class Informations extends React.Component<Props, State> {
 
         <Input
           value={this.state.name}
-          placeholder="Name"
+          placeholder='Name'
           onChange={({ target: { value: name } }) => {
             this.setState({ name });
           }}
@@ -33,7 +32,7 @@ class Informations extends React.Component<Props, State> {
 
         <Input
           value={this.state.description}
-          placeholder="Description"
+          placeholder='Description'
           onChange={({ target: { value: description } }) => {
             this.setState({ description });
           }}
@@ -42,17 +41,17 @@ class Informations extends React.Component<Props, State> {
 
         <Textarea
           value={this.state.organisation}
-          placeholder="Organisation"
+          placeholder='Organisation'
           onChange={({ target: { value: organisation } }) => {
             this.setState({ organisation });
           }}
         />
-        <Label>Localisation :</Label>
+        <Label>Location :</Label>
         <Textarea
-          value={this.state.localisation}
-          placeholder="Localisation"
-          onChange={({ target: { value: localisation } }) => {
-            this.setState({ localisation });
+          value={this.state.location}
+          placeholder='Location'
+          onChange={({ target: { value: location } }) => {
+            this.setState({ location });
           }}
         />
       </InformationContainer>
