@@ -1,40 +1,26 @@
 import React from 'react';
 import { Experience } from '../model/experience';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 
 interface Props {
-  enterpriseParams: string;
+  experience: Experience;
 }
 
-interface State {
-  enterprise?: Experience;
-}
-
-class Details extends React.Component<Props, State> {
+class Details extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
-    this.state = {};
-  }
-  async componentDidMount() {
-    const enterprise = await fetchEnterpriseByName(this.props.enterpriseParams);
-    this.setState({ enterprise });
   }
   public render() {
     return (
       <DetailsPage>
         <DetailsContainer>
-          <BackContainer>
-            <Link to='/'>{'< List'}</Link>{' '}
-          </BackContainer>
-          {!!this.state.enterprise ? (
-            <>
-              <Name>{this.state.enterprise.name}</Name>
-              <Text>{this.state.enterprise.description}</Text>
-              <Text>{this.state.enterprise.organisation}</Text>
+              <Name>{this.props.experience.name}</Name>
+              <Text>{this.props.experience.description}</Text>
+              <Text>{this.props.experience.organisation}</Text>
               <Label>Main team : </Label>
               <PeopleContaner data-testid='general-team-container'>
-                {this.state.enterprise.teamGeneral.map((people, index) => (
+                {this.props.experience.teamGeneral.map((people, index) => (
                   <People key={index}>
                     <PeopleName>{people.name}</PeopleName>
                     <PeopleRole> {people.role}</PeopleRole>
@@ -44,31 +30,16 @@ class Details extends React.Component<Props, State> {
 
               <Label>Practices : </Label>
               <PracticesContainer data-testid='practices-container'>
-                {this.state.enterprise.practices.map((practice, index) => (
+                {this.props.experience.practices.map((practice, index) => (
                   <div key={index}>{practice}</div>
                 ))}
               </PracticesContainer>
-            </>
-          ) : (
-            <div>
-              <p>
-                Experience: <b>{`${this.props.enterpriseParams}`}</b> Not Found
-                !
-              </p>
-            </div>
-          )}
         </DetailsContainer>
       </DetailsPage>
     );
   }
 }
 
-async function fetchEnterpriseByName(name: string): Promise<Experience> {
-  const result = await fetch(`http://localhost:3001/enterprise/${name}`);
-  const { response } = await result.json();
-
-  return response;
-}
 
 const DetailsPage = styled.div`
   display: flex;
@@ -78,18 +49,8 @@ const DetailsPage = styled.div`
 `;
 const DetailsContainer = styled.div`
   display: flex;
-  width: 60%;
+  width: 100%;
   flex-direction: column;
-`;
-const BackContainer = styled.div`
-  padding-top: 10px;
-  a {
-    text-decoration: none;
-    color: black;
-    font-size: 13px;
-    color: #e39774;
-    cursor: pointer;
-  }
 `;
 const PracticesContainer = styled.div`
   display: flex;
