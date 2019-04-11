@@ -3,7 +3,8 @@
 Arborescence
 
 ```bash
-|-- back
+|-- slide     // cmd to execute : yarn && yarn start
+|-- back      // cmd to execute : yarn && yarn start
 └-- front
     |-- html-css-integration // [read-only] exemple de html pour integrer les étapes
     |-- public  // [read-only] les assets public y compris index.html
