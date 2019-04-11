@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './ExperienceList.module.css';
 import { Experience } from '../model/experience';
-import Details from './ExperienceDetails';
 
 async function fetchExperiences(filter?: string): Promise<Experience[]> {
   const result = await fetch(
@@ -13,7 +12,6 @@ async function fetchExperiences(filter?: string): Promise<Experience[]> {
 
 interface State {
   experiences: Experience[];
-  detailsShowedExperienceId?: string;
 }
 
 class ExperienceList extends React.Component<{}, State> {
@@ -49,21 +47,7 @@ class ExperienceList extends React.Component<{}, State> {
         </div>
         <div className={styles['list-container']}>
           {this.state.experiences.map((experience) => (
-            <ExperienceCard
-              experience={experience}
-              key={experience.id}
-              showDetails={
-                this.state.detailsShowedExperienceId === experience.id
-              }
-              onClick={() => {
-                this.setState({
-                  detailsShowedExperienceId:
-                    this.state.detailsShowedExperienceId !== experience.id
-                      ? experience.id
-                      : undefined,
-                });
-              }}
-            />
+            <ExperienceCard experience={experience} key={experience.id} />
           ))}
         </div>
       </div>
@@ -72,37 +56,16 @@ class ExperienceList extends React.Component<{}, State> {
 }
 
 const ExperienceCard = ({
-  experience,
-  showDetails,
-  onClick,
-}: {
-  experience: Experience;
-  showDetails?: boolean;
-  onClick?: () => void;
-}) => (
-  <div
-    className={styles['experience-card']}
-    onClick={() => (onClick ? onClick() : undefined)}
-  >
-    {showDetails ? (
-      <Details experience={experience} />
-    ) : (
-      <ExperienceSummary experience={experience} />
-    )}
-  </div>
-);
-
-const ExperienceSummary = ({
-  experience: { name, description, location, organisation },
+  experience: { id, name, description, organisation, location },
 }: {
   experience: Experience;
 }) => (
-  <>
+  <div className={styles['experience-card']}>
     <h5 className={styles['name']}>{name}</h5>
     <p className={styles['text']}>{description}</p>
     <p className={styles['text']}>{organisation}</p>
     <p className={styles['location']}>{location}</p>
-  </>
+  </div>
 );
 
 export default ExperienceList;
