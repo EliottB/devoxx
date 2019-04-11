@@ -17,7 +17,7 @@ class Team extends React.Component<{}, State> {
     return (
       <div className={styles['team-container']}>
         <label className={styles['label']}>Team :</label>
-        <PeopleInput
+        <AddPeople
           onChange={(people) => {
             this.setState({
               team: [...this.state.team, people],
@@ -64,7 +64,7 @@ class Team extends React.Component<{}, State> {
   }
 }
 
-export const PeopleInput = (props: { onChange: (people: People) => void }) => {
+export const AddPeople = (props: { onChange: (people: People) => void }) => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   return (
