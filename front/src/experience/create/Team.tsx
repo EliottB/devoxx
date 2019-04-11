@@ -1,54 +1,28 @@
-import React, { useState } from 'react';
-import { People } from '../../model/experience';
-import styles from './Team.module.css';
+import React from 'react';
+import styles from './Informations.module.css';
 
-interface State {
-  team: People[];
-}
+interface State {}
 
 class Team extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
-    this.state = {
-      team: [],
-    };
+    this.state = {};
   }
   render() {
     return (
-      <div className={styles['team-container']}>
+      <div className={styles['information-container']}>
         <label className={styles['label']}>Team :</label>
-        <AddPeople
-          onChange={(people) => {
-            this.setState({
-              team: [...this.state.team, people],
-            });
-          }}
-        />
-        <div className={styles['people-container']}>
-          {this.state.team.map(({ name, role }, indexToFound) => (
-            <div
-              className={styles['people']}
-              key={`${name}+${indexToFound}+${role}`}
-            >
-              <span className={styles['people-name']}>{name} </span>
-              <span className={styles['people-role']}> {role} </span>
-              <span
-                className={styles['people-delete']}
-                onClick={() => {
-                  const team = this.state.team.reduce(
-                    (acc: Array<People>, people, index) => {
-                      return indexToFound !== index ? [...acc, people] : acc;
-                    },
-                    [],
-                  );
-                  this.setState({ team });
-                }}
-              >
-                X
-              </span>
-            </div>
-          ))}
-        </div>
+        {/* 
+        
+        STEP 6 : REPLACE THIS COMMENT BY Add people
+
+        */}
+
+        {/* 
+        
+        STEP 6 : REPLACE THIS COMMENT BY PEOPLE LIST 
+
+        */}
         <a>
           <button
             className={styles['button']}
@@ -63,49 +37,4 @@ class Team extends React.Component<{}, State> {
     );
   }
 }
-
-export const AddPeople = (props: { onChange: (people: People) => void }) => {
-  const [name, setName] = useState('');
-  const [role, setRole] = useState('');
-  return (
-    <div className={styles['inline']}>
-      <label className={styles['label-inline']}>Name :</label>
-      <input
-        className={styles['input-inline']}
-        type='text'
-        value={name}
-        placeholder='Name'
-        onChange={({ target: { value } }) => {
-          setName(value);
-        }}
-      />
-      <label className={styles['label-inline']}>Role :</label>
-      <input
-        className={styles['input-inline']}
-        type='text'
-        value={role}
-        placeholder='Role'
-        onChange={({ target: { value } }) => {
-          setRole(value);
-        }}
-      />
-      <button
-        className={styles['button-inline']}
-        onClick={() => {
-          if (name && role) {
-            props.onChange({
-              name,
-              role,
-            });
-            setName('');
-            setRole('');
-          }
-        }}
-      >
-        Add
-      </button>
-    </div>
-  );
-};
-
 export default Team;
