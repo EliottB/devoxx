@@ -4,7 +4,7 @@
   "description": "A minimal boilerplate for typescript and express",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon 8080",
+    "start": "nodemon",
     "build": "webpack --mode=production --config webpack.config.ts",
     "test": "jest"
   },
