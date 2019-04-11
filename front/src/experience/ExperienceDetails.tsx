@@ -2,12 +2,11 @@ import React from 'react';
 import { Experience } from '../model/experience';
 import styled from 'styled-components';
 
-
 interface Props {
   experience: Experience;
 }
 
-class Details extends React.Component<Props, {}> {
+class ExperienceDetails extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
   }
@@ -15,31 +14,30 @@ class Details extends React.Component<Props, {}> {
     return (
       <DetailsPage>
         <DetailsContainer>
-              <Name>{this.props.experience.name}</Name>
-              <Text>{this.props.experience.description}</Text>
-              <Text>{this.props.experience.organisation}</Text>
-              <Label>Main team : </Label>
-              <PeopleContaner data-testid='general-team-container'>
-                {this.props.experience.teamGeneral.map((people, index) => (
-                  <People key={index}>
-                    <PeopleName>{people.name}</PeopleName>
-                    <PeopleRole> {people.role}</PeopleRole>
-                  </People>
-                ))}
-              </PeopleContaner>
+          <Name>{this.props.experience.name}</Name>
+          <Text>{this.props.experience.description}</Text>
+          <Text>{this.props.experience.organisation}</Text>
+          <Label>Main team : </Label>
+          <PeopleContaner data-testid='general-team-container'>
+            {this.props.experience.teamGeneral.map((people, index) => (
+              <People key={index}>
+                <PeopleName>{people.name}</PeopleName>
+                <PeopleRole> {people.role}</PeopleRole>
+              </People>
+            ))}
+          </PeopleContaner>
 
-              <Label>Practices : </Label>
-              <PracticesContainer data-testid='practices-container'>
-                {this.props.experience.practices.map((practice, index) => (
-                  <div key={index}>{practice}</div>
-                ))}
-              </PracticesContainer>
+          <Label>Practices : </Label>
+          <PracticesContainer data-testid='practices-container'>
+            {this.props.experience.practices.map((practice, index) => (
+              <div key={index}>{practice}</div>
+            ))}
+          </PracticesContainer>
         </DetailsContainer>
       </DetailsPage>
     );
   }
 }
-
 
 const DetailsPage = styled.div`
   display: flex;
@@ -100,4 +98,4 @@ const PeopleRole = styled.span`
   color: #5c9ead;
 `;
 
-export default Details;
+export default ExperienceDetails;

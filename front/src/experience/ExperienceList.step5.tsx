@@ -13,7 +13,7 @@ async function fetchExperiences(filter?: string): Promise<Experience[]> {
 
 interface State {
   experiences: Experience[];
-  currentDetails?: string;
+  detailsShowedExperienceId?: string;
 }
 
 class ExperienceList extends React.Component<{}, State> {
@@ -52,11 +52,13 @@ class ExperienceList extends React.Component<{}, State> {
             <ExperienceCard
               experience={experience}
               key={experience.id}
-              showDetails={this.state.currentDetails === experience.id}
+              showDetails={
+                this.state.detailsShowedExperienceId === experience.id
+              }
               onClick={() => {
                 this.setState({
-                  currentDetails:
-                    this.state.currentDetails !== experience.id
+                  detailsShowedExperienceId:
+                    this.state.detailsShowedExperienceId !== experience.id
                       ? experience.id
                       : undefined,
                 });

@@ -3,7 +3,6 @@ import styles from './ExperienceList.module.css';
 import { Experience } from '../model/experience';
 import Details from './ExperienceDetails';
 
-
 async function fetchExperiences(filter?: string): Promise<Experience[]> {
   const result = await fetch(
     `http://localhost:3001/list/experience/${filter || ''}`,
@@ -14,7 +13,7 @@ async function fetchExperiences(filter?: string): Promise<Experience[]> {
 
 interface State {
   experiences: Experience[];
-  currentDetails?: string;
+  detailsShowedExperienceId?: string;
 }
 
 class ExperienceList extends React.Component<{}, State> {
@@ -50,13 +49,21 @@ class ExperienceList extends React.Component<{}, State> {
         </div>
         <div className={styles['list-container']}>
           {this.state.experiences.map((experience) => (
-            <ExperienceCard 
-            experience={experience} 
-            key={experience.id} 
-            showDetails={this.state.currentDetails === experience.id}
-            onClick={() =>{
-             this.setState({currentDetails: this.state.currentDetails !== experience.id ? experience.id : undefined})
-            }} />
+            <ExperienceCard
+              experience={experience}
+              key={experience.id}
+              showDetails={
+                this.state.detailsShowedExperienceId === experience.id
+              }
+              onClick={() => {
+                this.setState({
+                  detailsShowedExperienceId:
+                    this.state.detailsShowedExperienceId !== experience.id
+                      ? experience.id
+                      : undefined,
+                });
+              }}
+            />
           ))}
         </div>
       </div>
@@ -71,17 +78,22 @@ const ExperienceCard = ({
 }: {
   experience: Experience;
   showDetails?: boolean;
-  onClick?:() =>void;
+  onClick?: () => void;
 }) => (
-  <div className={styles['experience-card']} onClick={() => onClick ? onClick() : undefined}>
-  { showDetails ? (<Details experience={experience}/>) : 
-  <div>
-    <h5 className={styles['name']}>{experience.name}</h5>
-    <p className={styles['text']}>{experience.description}</p>
-    <p className={styles['text']}>{experience.organisation}</p>
-    <p className={styles['location']}>{experience.location}</p>
-    </div>
-  }
+  <div
+    className={styles['experience-card']}
+    onClick={() => (onClick ? onClick() : undefined)}
+  >
+    {showDetails ? (
+      <Details experience={experience} />
+    ) : (
+      <div>
+        <h5 className={styles['name']}>{experience.name}</h5>
+        <p className={styles['text']}>{experience.description}</p>
+        <p className={styles['text']}>{experience.organisation}</p>
+        <p className={styles['location']}>{experience.location}</p>
+      </div>
+    )}
   </div>
 );
 

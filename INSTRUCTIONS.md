@@ -1,3 +1,36 @@
+## Presentation
+
+Arborescence
+
+```bash
+|-- back
+└-- front
+    |-- html-css-integration // [read-only] exemple de html pour integrer les étapes
+    |-- public  // [read-only] les assets public y compris index.html
+    └-- src
+        |-- data
+        |   └- experience.json   // [read-only] data nécessaire à la première étape
+        |-- experience
+        |   |-- create
+        |   |   |-- Informations.module.css  // [read-only] css lié à Information
+        |   |   |-- Team.module.css          // [read-only] css lié à Team
+        |   |   |-- Informations.tsx         // [read-only]
+        |   |   |-- Team.tsx                 // Affiche le formulaire de création de team (Etape 5)
+        |   |   └-- Wizard.tsx               // [read-only]
+        |   |-- ExperienceDetails.module.css // [read-only] css lié à ExperienceDetails
+        |   |-- ExperienceDetails.tsx        // [read-only] details de Experience
+        |   |-- ExperienceList.tsx           // Liste de Experience
+        |   └-- ExperienceList.module.css    // [read-only] css lié à ExperienceList
+        |-- model
+        |   └ experience.ts                  // [read-only] interfaces à importé
+        |-- App.module.css
+        |-- App.ts                           // [read-only] Premier component de react
+        |-- index.tsx                        // [read-only] point de départ de react
+        └-- styles.ts
+
+
+```
+
 ## Etape 1 : Afficher la liste des expériences depuis un fichier JSON
 
 Cette étape consiste à afficher la liste des expériences depuis un fichier JSON.
@@ -10,7 +43,9 @@ Cette étape consiste à afficher la liste des expériences depuis un fichier JS
 
   - Props
 
-- Implémenter le composant `ExperienceList` dans [./front/src/experience/ExperienceList.tsx](./front/src/experience/ExperienceList.tsx). Appuyez vous sur le fichier HTML [./front/html-css-integration/ExperienceList.html](./front/html-css-integration/ExperienceList.html) et sur le fichier CSS [./front/src/experience/ExperienceList.module.css](./front/src/experience/ExperienceList.module.css). La liste des expériences venant du fichier [./front/src/data/experiences.json](./front/src/data/experiences.json) peut être chargée avec le code suivant :
+- Implémenter le composant `ExperienceList` dans [./front/src/experience/ExperienceList.tsx](./front/src/experience/ExperienceList.tsx). Appuyez vous sur le fichier HTML [./front/html-css-integration/ExperienceList.html](./front/html-css-integration/ExperienceList.html) et sur le fichier CSS [./front/src/experience/ExperienceList.module.css](./front/src/experience/ExperienceList.module.css).
+-
+- La liste des expériences venant du fichier [./front/src/data/experiences.json](./front/src/data/experiences.json) peut être chargée avec le code suivant :
 
   ```typescript
   const experiences: Experience[] = require('../data/experiences.json');
@@ -56,70 +91,37 @@ Cette étape consiste à afficher la liste des expériences depuis un service RE
 
 ## Etape 4 : Afficher le détail d'une expérience
 
+Nous souhaitons offir la possibilité à l'utilisateur d'avoir le détail d'une expérience en cliquant sur cette celle-ci. Un second clique sur l'expérience permet de revenir au summary (informations affichés dans les précédentes étapes). Une seul expérience peut avoir son détail affiché à un moment donné.
+
 - React concepts utiles:
 
   - Handling Events (div.onClick)
   - Conditional Rendering
   - Lifting State Up
 
+- Refactorer le composant `ExperienceCard` en extrayant les `children` de la `<div className={styles['experience-card']}>`dans un component nommé `ExperienceSummary`. Un composant ne pouvant renvoyer qu'un `React.Element`, wrappez les `children` dans une `<div></div>` ou dans `<></>` le deuxieme choix ne crée aucun element html : [voir ici](https://reactjs.org/docs/fragments.html#short-syntax)
+
+* Pour afficher les détails vous devez vous servir du component `ExperienceDetails` se trouvant dans [./front/src/experience/ExperienceDetails.tsx](./front/src/experience/ExperienceDetails.tsx). Ce dernier prend en `props` une experience de type `Experience`
+
 - Lors d'un clic sur une `ExperienceCard` vous devez :
-  - remplacer la `name`, `description`, `organisation`, `location` par le détail de l'expérience
-  - Un second clic sur les détails fait retrouver son état d'origine à `ExperienceCard`
-  - Une seule `ExperienceCard` à la fois affiche le détail d'une expérience
-  - Pour afficher les détails vous devez vous servir du component `Details` se trouvant dans [./front/src/experience/ExperienceDetails.tsx](./front/src/experience/ExperienceDetails.tsx)
+  - Affichez le composant `ExperienceDetails` à la place du composant `ExperienceSummary`. Afin de faire cela utilisez le concept de `Conditional Rendering`.
+  - Un second clic sur `ExperienceCard` permet de ré-afficher le summary (`ExperienceSummary`)
+  - Pour mémoire, une seule expérience peut avoir son détail afficher à un instant t. Par exemple, je clique pour ouvrir le détail de l'expérience 'crème de la crème', ce dernier s'ouvre, je clique sur l'expérience BNP alors le detail de l'expérience 'crème de la crème' se ferme et celui de BNP s'ouvre.
 
-## Etape 5 : Permettre l'ajout et la suppression de `practices` dans le formulaire de création d'expérience
-
-- React concepts utiles:
-
-  - Controlled Component
-
-- Lorsque vous cliquez sur `Créer une experience` vous êtes redirigé sur la route [http://localhost:3000/experience/create/informations](http://localhost:3001/experience/create/informations) qui affiche le component `Informations` de [./front/src/experience/create/Informations.tsx](./front/src/experience/create/Informations.tsx)
-- Vous trouverez un exemple html ici :[./front/html-css-integration/Informations.tsx](./front/html-css-integration/Informations.tsx)
-
-- Dans [Informations.tsx](./front/src/experience/create/Informations.tsx) :
-
-  - Vous devrez ajouter un `<select>` après le label `Practices` (remplacez les commentaires)
-
-    - Options du select :
-
-    ```html
-    <option value=""></option>
-    <option value="react">react</option>
-    <option value="node">node</option>
-    <option value="go">go</option>
-    <option value="angular">angular</option>
-    <option value="mob progamming">mob progamming</option>
-    ```
-
-  - Sous le `<select>` remplacez les commentaires par une liste de `Practices`
-
-    - cette liste est alimenté à chaque changement de valeurs du `<select>`
-    - chaque éléments doivent pouvoir êtres retirer de la liste en un clic
-
-  - Veillez à nettoyer la valeur du `<select>` apres chaque changement
-
-## Etape 6 : Permettre l'ajout de personnes dans le formulaire de création d'experience
+## Etape 5 : Permettre l'ajout de personnes dans le formulaire de création d'experience
 
 - React concepts utiles:
 
-  - Hook
-  - Form validation
+  - Hook (useState)
 
-- Depuis [la page Informations](http://localhost:3001/experience/create/informations) lorsque vous cliquez sur `Suivant` vous êtes redirigé sur la route [http://localhost:3000/experience/create/team](http://localhost:3001/experience/create/team) qui affiche le component `Team` de [./front/src/experience/create/Informations.tsx](./front/src/experience/create/Informations.tsx)
+Depuis [la page Informations](http://localhost:3001/experience/create/informations) lorsque vous cliquez sur `Suivant` vous êtes redirigé sur la route [http://localhost:3000/experience/create/team](http://localhost:3001/experience/create/team) qui affiche le component `Team` de [./front/src/experience/create/Informations.tsx](./front/src/experience/create/Informations.tsx)
 
-- Vous allez devoir créer un formulaire pour renseigner le nom et le role d'un membre et en suite afficher la liste des membres : [HTML final](./front/html-css-integration/Team.html)
+Vous allez devoir créer un formulaire pour renseigner le nom et le role d'un membre et en suite afficher la liste des membres : [HTML final](./front/html-css-integration/Team.html)
 
-- Le formulaire :
+#### tâches:
 
-  - Créer un (StateLess)component respectant ces critères :
-    - Un champ text pour le `name`
-    - Un champ text pour le `role`
-    - Un bouton `add`
-    - prends en property une fonction `onChange` qui retourne un [People](./front/src/model/experience.ts)
-    - Au clic sur le bouton le component retourne un `People` si le `name` et le `role` sont renseignés, sinon ne retourne rien
-    - Une fois un `People` retourné vider les champs text
+- créer un **Function** Component nommé AddPeople permettant l'ajout d'une personne (cf [HTML final](./front/html-css-integration/Team.html) pour voir la structure HTML). Appuyez vous sur la fonctionnalité Hooks (useState) pour gérer l'état de ce composant. Ce component a en props une fonction `onAdd` qui retourne la personne crée de type [People](./front/src/model/experience.ts). Assurez vous de désactiver le bouton si tous les champs ne sont pas saisies. Au clic sur le bouton 'add', vider les champs.
 
-- La liste :
-  - Afficher la liste des membres ajouté à l'équipe
+- implémenter La liste :
+  - Afficher la liste des membres ajoutés à l'équipe
   - Un membre doit pouvoir être supprimé en un clic
