@@ -18,7 +18,7 @@ class Team extends React.Component<{}, State> {
       <div className={styles['team-container']}>
         <label className={styles['label']}>Team :</label>
         <AddPeople
-          onChange={(people) => {
+          onAdd={(people) => {
             this.setState({
               team: [...this.state.team, people],
             });
@@ -64,7 +64,7 @@ class Team extends React.Component<{}, State> {
   }
 }
 
-export const AddPeople = (props: { onChange: (people: People) => void }) => {
+export const AddPeople = (props: { onAdd: (people: People) => void }) => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   return (
@@ -93,7 +93,7 @@ export const AddPeople = (props: { onChange: (people: People) => void }) => {
         className={styles['button-inline']}
         onClick={() => {
           if (name && role) {
-            props.onChange({
+            props.onAdd({
               name,
               role,
             });
