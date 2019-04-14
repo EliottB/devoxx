@@ -87,7 +87,20 @@ function connectDataProvider(
       this.setState({ experiences });
     }
     render() {
-      return <Composed experiences={this.state.experiences} />;
+      return (
+        <>
+          <div>
+            Filter :
+            <input
+              className={styles['input']}
+              onChange={async ({ target: { value } }) => {
+                this.filterList(value);
+              }}
+            />
+          </div>
+          <Composed experiences={this.state.experiences} />
+        </>
+      );
     }
   };
 }
