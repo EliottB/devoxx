@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ExperienceList.module.css';
 import { Experience } from '../model/experience';
 import Details from './ExperienceDetails';
@@ -19,26 +19,11 @@ interface State {
 class ExperienceList extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
-    this.state = {
-      experiences: [],
-    };
   }
-  async componentDidMount() {
-    const experiences = await fetchExperiences();
-    this.setState({
-      experiences,
-    });
-  }
-
-  async filterList(filter?: string) {
-    const experiences = await fetchExperiences(filter);
-    this.setState({ experiences });
-  }
-
   render() {
     return (
       <div className={styles['list-main-container']}>
-        <div>
+        {/* <div>
           Filter :
           <input
             className={styles['input']}
@@ -46,30 +31,68 @@ class ExperienceList extends React.Component<{}, State> {
               this.filterList(value);
             }}
           />
-        </div>
-        <div className={styles['list-container']}>
-          {this.state.experiences.map((experience) => (
-            <ExperienceCard
-              experience={experience}
-              key={experience.id}
-              showDetails={
-                this.state.detailsShowedExperienceId === experience.id
-              }
-              onClick={() => {
-                this.setState({
-                  detailsShowedExperienceId:
-                    this.state.detailsShowedExperienceId !== experience.id
-                      ? experience.id
-                      : undefined,
-                });
-              }}
-            />
-          ))}
-        </div>
+        </div> */}
+
+        <ConnectedList />
       </div>
     );
   }
 }
+
+const DefaultListContainer = ({
+  experiences,
+}: {
+  experiences: Experience[];
+}) => {
+  const [detailsShowedExperienceId, setDetailsShowedExperienceId] = useState();
+  return (
+    <div className={styles['list-container']}>
+      {experiences.map((experience) => (
+        <ExperienceCard
+          experience={experience}
+          key={experience.id}
+          showDetails={detailsShowedExperienceId === experience.id}
+          onClick={() => {
+            setDetailsShowedExperienceId(
+              detailsShowedExperienceId !== experience.id
+                ? experience.id
+                : undefined,
+            );
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+function connectDataProvider(
+  Composed: React.ComponentType<any>,
+): React.ComponentClass<any> {
+  return class test extends React.Component<{}, { experiences: Experience[] }> {
+    constructor(props: {}) {
+      super(props);
+      this.state = {
+        experiences: [],
+      };
+    }
+    async componentDidMount() {
+      const experiences = await fetchExperiences();
+      this.setState({
+        experiences,
+      });
+    }
+
+    async filterList(filter?: string) {
+      const experiences = await fetchExperiences(filter);
+      this.setState({ experiences });
+    }
+    render() {
+      return <Composed experiences={this.state.experiences} />;
+    }
+  };
+}
+
+const ConnectedList = connectDataProvider(DefaultListContainer);
 
 const ExperienceCard = ({
   experience,
